@@ -1,0 +1,19 @@
+.CartTable{
+    width: 90%;
+    padding: 5px;
+    margin: auto;
+
+}
+.CartTable tr, th, td{
+    border: 1px solid green;
+    padding: 5px;
+
+}
+.CartTable button{
+    box-sizing: border-box;
+    background-color: wheat;
+    border-radius: 5px;
+    width: 15px;
+    color: black;
+}
+

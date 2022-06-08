@@ -1,12 +1,13 @@
 import './App.css';
 import { Cart } from './Components/Cart';
-import { Checkout } from './Components/Checkout';
 import { Navbar } from './Components/Navbar';
 import { Products } from './Components/Products';
 import { Product } from './Components/Product';
 import { Footer } from './Components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './Components/Home';
+import { Login } from './Components/Login';
+import RequiredAuth from './HOF/RequiredAuth';
 
 function App() {
   return (
@@ -14,10 +15,10 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/product:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/products" element={<RequiredAuth ><Products /></RequiredAuth>} />
+        <Route path="/product/:id" element={<RequiredAuth ><Product /></RequiredAuth>} />
+        <Route path="/cart" element={<RequiredAuth><Cart /></RequiredAuth>} />
     </Routes>
     <Footer/>
     </div>

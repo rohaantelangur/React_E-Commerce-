@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { Link } from 'react-router-dom'
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Link,
+  // Link,
   IconButton,
   Button,
   Menu,
@@ -19,10 +20,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { CartContext } from "../Context/CartContext";
+
 
 export function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { CartItem, setCartItem } = useContext(CartContext);
 
   return (
     <>
@@ -42,7 +46,7 @@ export function Navbar() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              <Link to={"/product"}>All Products</Link>
+              <Link to="/products">All Products</Link>
               <Menu>
                 <MenuButton
                   as={Button}
@@ -61,6 +65,8 @@ export function Navbar() {
               </Menu>
             </HStack>
           </HStack>
+          <Link to="/cart"><h1>{CartItem.length}</h1></Link>
+            
           <Flex alignItems={"center"}>
             <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
