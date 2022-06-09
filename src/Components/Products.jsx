@@ -24,7 +24,7 @@ export const Products = () => {
 
   useEffect(() => {
     axios
-      .get("https://fakestoreapi.com/products")
+      .get("http://localhost:8080/products")
       .then((r) => setproducts(r.data));
   }, []);
 //   console.log(products);

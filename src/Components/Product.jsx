@@ -21,6 +21,7 @@ export const Product = () => {
   const { id } = useParams();
   console.log(id);
   const [showproduct, setshowproduct] = useState({});
+  const [navi, setnavi] = useState(false);
   const { CartItem, setCartItem } = useContext(CartContext);
 
 
@@ -128,12 +129,18 @@ export const Product = () => {
               _focus={{
                 bg: "blue.500",
               }}
+              onClick={()=>{
+                // <Navigate to="/cart"/>
+                setCartItem([...CartItem,{ id:showproduct.id,qty:1,title:showproduct.title,image:showproduct.image,price:showproduct.price}]);
+                setnavi(true)
+              }}
             >
-            <Link to="/checkout">Buy Now.</Link>
+              Buy Now.
             </Button>
           </Stack>
         </Stack>
       </Stack>
+      {navi?<Navigate to="/cart"/>:""}
     </Center>
   );
 };
