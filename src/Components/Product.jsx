@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { useToast } from '@chakra-ui/react'
 import { Navigate, useParams } from "react-router-dom";
 import {
   Badge,
@@ -18,8 +19,9 @@ import { CartContext } from "../Context/CartContext";
 
 
 export const Product = () => {
+  const toast = useToast()
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const [showproduct, setshowproduct] = useState({});
   const [navi, setnavi] = useState(false);
   const { CartItem, setCartItem } = useContext(CartContext);
@@ -107,10 +109,33 @@ export const Product = () => {
               _focus={{
                 bg: "gray.200",
               }}
-              onClick={()=>{
-                setCartItem([...CartItem,{ id:showproduct.id,qty:1,title:showproduct.title,image:showproduct.image,price:showproduct.price}])
-              }
-              }
+              onClick={() => {
+                let p = true;
+                CartItem.map((el)=>{
+                 if(showproduct.id === el.id){
+                   p=false;
+                   toast({
+                    title: 'You already add this product',
+                    status: 'warning',
+                    position:'top',
+                    duration: 9000,
+                    isClosable: true,
+                  })
+                 }
+               })
+               if(p===true){
+                setCartItem([
+                  ...CartItem,
+                  {
+                    id: showproduct.id,
+                    title: showproduct.title,
+                    qty:1,
+                    image: showproduct.image,
+                    price: showproduct.price,
+                  },
+                ]);
+               }
+              }}
             >
             Add To Cart              
             </Button>
@@ -129,10 +154,33 @@ export const Product = () => {
               _focus={{
                 bg: "blue.500",
               }}
-              onClick={()=>{
-                // <Navigate to="/cart"/>
-                setCartItem([...CartItem,{ id:showproduct.id,qty:1,title:showproduct.title,image:showproduct.image,price:showproduct.price}]);
-                setnavi(true)
+              onClick={() => {
+                let p = true;
+                CartItem.map((el)=>{
+                 if(showproduct.id === el.id){
+                   p=false;
+                   toast({
+                    title: 'You already add this product',
+                    status: 'warning',
+                    position:'top',
+                    duration: 9000,
+                    isClosable: true,
+                  })
+                 }
+               })
+               if(p===true){
+                setCartItem([
+                  ...CartItem,
+                  {
+                    id: showproduct.id,
+                    title: showproduct.title,
+                    qty:1,
+                    image: showproduct.image,
+                    price: showproduct.price,
+                  },
+                ]);
+               }
+               setnavi(true)
               }}
             >
               Buy Now.

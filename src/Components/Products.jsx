@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useToast } from '@chakra-ui/react'
 
 import {
   Box,
@@ -19,6 +20,7 @@ import { CartContext } from "../Context/CartContext";
 
 export const Products = () => {
   const [products, setproducts] = useState([]);
+  const toast = useToast()
   const { CartItem, setCartItem } = useContext(CartContext);
 
 
@@ -45,6 +47,7 @@ export const Products = () => {
             pos={"relative"}
             //   zIndex={1}
             >
+                  <Link to={"/product/"+item.id}>
               
               <Box
                 rounded={"lg"}
@@ -86,9 +89,9 @@ export const Products = () => {
                   >
                   Brand
                 </Text>
-                <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
-                  <Link to={"/product/"+item.id}>{item.title}</Link>
-                </Heading>
+                <Text numberOfLines={1} fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
+                    {item.title}
+                </Text>
                 <Stack direction={"row"} align={"center"}>
                   <Text fontWeight={800} fontSize={"xl"}>
                     ${item.price}
@@ -98,14 +101,39 @@ export const Products = () => {
                   </Text>
                 </Stack>
               </Stack>
+              </Link>
               <Button
               variant={"outline"}
               colorScheme={"teal"}
               size={"sm"}
               mr={4}
               leftIcon={<AddIcon />}
-              onClick={()=>{
-                setCartItem([...CartItem,{ id:item.id,qty:1,title:item.title,image:item.image,price:item.price}])
+              onClick={() => {
+                let p = true;
+                CartItem.map((el)=>{
+                 if(item.id === el.id){
+                   p=false;
+                   toast({
+                    title: 'You already add this product',
+                    status: 'warning',
+                    position:'top',
+                    duration: 9000,
+                    isClosable: true,
+                  })
+                 }
+               })
+               if(p===true){
+                setCartItem([
+                  ...CartItem,
+                  {
+                    id: item.id,
+                    title: item.title,
+                    qty:1,
+                    image: item.image,
+                    price: item.price,
+                  },
+                ]);
+               }
               }}
             >
               ADD TO CART

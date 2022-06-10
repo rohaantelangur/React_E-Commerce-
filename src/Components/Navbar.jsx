@@ -5,7 +5,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  // Link,
   IconButton,
   Button,
   Menu,
@@ -70,7 +69,7 @@ export function Navbar() {
           <Link to="/cart"><h1>{CartItem.length}</h1></Link>
             
           <Flex alignItems={"center"}>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} mx={'15px'}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>
             <Button
