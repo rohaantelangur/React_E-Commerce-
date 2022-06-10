@@ -20,6 +20,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartContext } from "../Context/CartContext";
+import { BsCartPlusFill } from "react-icons/bs"
 
 
 export function Navbar() {
@@ -48,30 +49,28 @@ export function Navbar() {
               display={{ base: "none", md: "flex" }}
             >
               <Link to="/products">All Products</Link>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  Category
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  <MenuItem>Link 2</MenuItem>
-                  <MenuItem>Link 3</MenuItem>
-                </MenuList>
-              </Menu>
+              <Link to="/about">About us</Link>
+              
             </HStack>
           </HStack>
-          <Link to="/cart"><h1>{CartItem.length}</h1></Link>
+          {/* <Link to="/cart"><h1></h1></Link> */}
             
           <Flex alignItems={"center"}>
             <Button onClick={toggleColorMode} mx={'15px'}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>
+            <Link to="/cart">
+            <Button
+              variant={"solid"}
+              colorScheme={"teal"}
+              size={"sm"}
+              mr={4}
+              leftIcon={<BsCartPlusFill />}
+              >
+              {CartItem.length}
+            </Button>
+            </Link>
+            <Link to="/login">
             <Button
               variant={"solid"}
               colorScheme={"teal"}
@@ -81,15 +80,9 @@ export function Navbar() {
             >
               Login
             </Button>
-            <Button
-              variant={"solid"}
-              colorScheme={"teal"}
-              size={"sm"}
-              mr={4}
-              leftIcon={<AddIcon />}
-            >
-              Register
-            </Button>
+            </Link>
+
+            
             <Menu>
               <MenuButton
                 as={Button}

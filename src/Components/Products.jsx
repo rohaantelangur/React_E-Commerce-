@@ -89,15 +89,15 @@ export const Products = () => {
                   >
                   Brand
                 </Text>
-                <Text numberOfLines={1} fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
+                <Text noOfLines={1} my={'10px'} fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
                     {item.title}
                 </Text>
                 <Stack direction={"row"} align={"center"}>
-                  <Text fontWeight={800} fontSize={"xl"}>
+                  <Text fontWeight={800} my={'10px'} fontSize={"xl"}>
                     ${item.price}
                   </Text>
                   <Text textDecoration={"line-through"} color={"gray.600"}>
-                    ${item.price+56}
+                    ${item.price*2}
                   </Text>
                 </Stack>
               </Stack>
